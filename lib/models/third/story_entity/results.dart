@@ -55,6 +55,7 @@ class Result {
       geofacet: (json["geo_facet"] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
       multimedia: (json["multimedia"] as List).map((item) => Multimedia.fromJson(item)).toList(),
       perfacet: (json["per_facet"] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+
     );
   }
 }
