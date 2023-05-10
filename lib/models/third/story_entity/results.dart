@@ -13,11 +13,11 @@ class Result {
     required this.updatedData,
     required this.createdData,
     required this.publishedData,
-    required this.desfacet,
-    required this.orgfacet,
-    required this.geofacet,
+    required this.desFacet,
+    required this.orgFacet,
+    required this.geoFacet,
     required this.multimedia,
-    required this.perfacet,
+    required this.perFacet,
   });
 
   final String section;
@@ -31,14 +31,34 @@ class Result {
   final String updatedData;
   final String createdData;
   final String publishedData;
-  final List<String> desfacet;
-  final List<String> orgfacet;
-  final List<String> perfacet;
-  final List<String> geofacet;
+  final List<String> desFacet;
+  final List<String> orgFacet;
+  final List<String> perFacet;
+  final List<String> geoFacet;
   final List<Multimedia> multimedia;
 
   factory Result.fromJson(Map<String, dynamic> json) {
     return Result(
+      perFacet: (json["per_facet"] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      orgFacet: (json["org_facet"] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      geoFacet: (json["geo_facet"] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      desFacet: (json["des_facet"] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      multimedia: (json["multimedia"] as List?)
+              ?.map((item) => Multimedia.fromJson(item))
+              .toList() ??
+          [],
       section: json["section"] as String? ?? "",
       subsection: json["subsection"] as String? ?? "",
       title: json["title"] as String? ?? "",
@@ -50,12 +70,6 @@ class Result {
       updatedData: json["updatedData"] as String? ?? "",
       createdData: json["createdData"] as String? ?? "",
       publishedData: json["publishedData"] as String? ?? "",
-      desfacet: (json["des_facet"] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
-      orgfacet: (json["org_facet"] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
-      geofacet: (json["geo_facet"] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
-      multimedia: (json["multimedia"] as List).map((item) => Multimedia.fromJson(item)).toList(),
-      perfacet: (json["per_facet"] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
-
     );
   }
 }
