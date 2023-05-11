@@ -11,97 +11,121 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return
-      // return Scaffold(
-      //   appBar: AppBar(
-      //     title: Text("linkify"),
-      //   ),
-      //   body: Container(
-      //     child: Center(
-      //
-      //       child: Linkify(text: "https://kun.uz",
-      //         options: LinkifyOptions(humanize: false),
-      //         onOpen: (link) async{
-      //         await launchUrl(Uri.parse(link.url));
-      //         print(link);
-      //         },
-      //       ),
-      //     ),
-      //   ),
-      // );
-      Scaffold(
-        appBar: AppBar(
-          title: Text("Working Api"),
-        ),
-        body: FutureBuilder<TopLevel>(
-          future: Repository.getStories(),
-          builder: (BuildContext context, AsyncSnapshot<TopLevel> snapshot) {
-            if (snapshot.hasData) {
-              var data = snapshot.data!;
-              return Container(
-                margin: EdgeInsets.all(13),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Status"),
-                        Text(data.status),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Section"),
-                        Text(data.section),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("LastUpdated"),
-                        Text(data.lastUpdated),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("CopyRight"),
-                        SizedBox(width: 10,),
-                        Expanded(child: Text(data.copyRight)),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Status"),
-                        Text(data.status),
-                      ],
-                    ),
-                    Expanded(child: ListView.builder(
+        // return Scaffold(
+        //   appBar: AppBar(
+        //     title: Text("linkify"),
+        //   ),
+        //   body: Container(
+        //     child: Center(
+        //
+        //       child: Linkify(text: "https://kun.uz",
+        //         options: LinkifyOptions(humanize: false),
+        //         onOpen: (link) async{
+        //         await launchUrl(Uri.parse(link.url));
+        //         print(link);
+        //         },
+        //       ),
+        //     ),
+        //   ),
+        // );
+        Scaffold(
+      appBar: AppBar(
+        title: Text("Working Api"),
+      ),
+      body: FutureBuilder<TopLevel>(
+        future: Repository.getStories(),
+        builder: (BuildContext context, AsyncSnapshot<TopLevel> snapshot) {
+          if (snapshot.hasData) {
+            var data = snapshot.data!;
+            return Container(
+              margin: EdgeInsets.all(13),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Status"),
+                      Text(data.status),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Section"),
+                      Text(data.section),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("LastUpdated"),
+                      Text(data.lastUpdated),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("CopyRight"),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(child: Text(data.copyRight)),
+                    ],
+                  ),
+                  Expanded(
+                    child: ListView.builder(
                       itemCount: data.results.length,
                       itemBuilder: (BuildContext context, index) {
-                        return Container();
-                      }
-                      ))
-                  ],
-                ),
+                        var item = data.results[index];
+                        return Container(
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.shade300,
+                                  blurRadius: 10,
+                                  spreadRadius: 10,
+                                  offset: const Offset(1, 3))
+                            ],
+                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text("Title: "),
+                                  SizedBox(width: 10,),
+                                  Expanded(
+                                    child: Text(item.title),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
               ),
-
-            ),
             );
-            } else {
+          } else {
             return Container(
-            child: Center(child: CircularProgressIndicator()),
+              child: Center(child: CircularProgressIndicator()),
             );
-            }
-          },
-        ),
-      );
+          }
+        },
+      ),
+    );
   }
 }
 //
@@ -152,7 +176,6 @@ class _MyHomePageState extends State<MyHomePage> {
 // },
 // ),
 // );
-
 
 // Scaffold(
 // appBar: AppBar(
