@@ -87,5 +87,7 @@ class MetaData{
     required this.scanner,
     required this.subject,
 });
+  factory MetaData.fromJson(Map<String, dynamic> json) => _$MetaDataFromJson(json);
+  Map<String, dynamic> toJson() => _$MetaDataToJson(this);
 
 }
