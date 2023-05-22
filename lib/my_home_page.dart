@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:work_api/models/fourth/my_top_level_data.dart';
 import 'package:work_api/repository/repository.dart';
 
 import 'models/third/story_entity/top_level.dart';
@@ -33,53 +34,53 @@ class _MyHomePageState extends State<MyHomePage> {
         // );
         Scaffold(
       appBar: AppBar(
-        title: Text("Working Api"),
+        title: const Text("Working Api"),
       ),
-      body: FutureBuilder<TopLevel>(
-        future: Repository.getStories(),
-        builder: (BuildContext context, AsyncSnapshot<TopLevel> snapshot) {
+      body: FutureBuilder<MyTopLevelData>(
+        future: Repository.getMyTopLevel(),
+        builder: (BuildContext context, AsyncSnapshot<MyTopLevelData> snapshot) {
           if (snapshot.hasData) {
             var data = snapshot.data!;
             return Container(
-              margin: EdgeInsets.all(13),
+              margin: const EdgeInsets.all(13),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Status"),
-                      Text(data.status),
+                      const Text("server"),
+                      Text(data.server),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Section"),
-                      Text(data.section),
+                      const Text("filesCount"),
+                      Text(data.filesCount),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text("LastUpdated"),
-                      Text(data.lastUpdated),
+                      Text(data.d1),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("CopyRight"),
+                      const Text("d2"),
                       const SizedBox(
                         width: 10,
                       ),
-                      Expanded(child: Text(data.copyRight)),
+                      Expanded(child: Text(data.d2)),
                     ],
                   ),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: data.results.length,
+                      itemCount: data.files.length,
                       itemBuilder: (BuildContext context, index) {
-                        var item = data.results[index];
+                        var item = data.files[index];
                         return Container(
                           margin: const EdgeInsets.all(10),
                           padding: const EdgeInsets.all(16),
@@ -103,9 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text("Title: "),
-                                  SizedBox(width: 10,),
+                                  const SizedBox(width: 10,),
                                   Expanded(
-                                    child: Text(item.title),
+                                    child: Text(item.source),
                                   )
                                 ],
                               ),
@@ -119,9 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             );
           } else {
-            return Container(
-              child: Center(child: CircularProgressIndicator()),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
