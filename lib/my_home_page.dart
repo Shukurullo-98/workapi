@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 import 'package:work_api/models/fourth/my_top_level_data.dart';
 import 'package:work_api/repository/repository.dart';
 
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text("server"),
-                      Text(data.server),
+                      Text(data.server.toString()),
                     ],
                   ),
                   Row(
